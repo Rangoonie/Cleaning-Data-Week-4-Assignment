@@ -1,0 +1,47 @@
+---
+title: "Code Book"
+author: "Philong Ho"
+date: "1/14/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The purpose of this project is to clean and organize the data collected from the accelerometers of a Samsung Galaxy S smartphone
+The data used here is from: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip. A full description of how this data was collected can be viewed here: http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones.
+
+The dataset includes the relevant files for this project:
+
+- 'README.txt'
+
+- 'features_info.txt': Shows information about the variables used on the feature vector.
+
+- 'features.txt': List of all features.
+
+- 'activity_labels.txt': Links the class labels with their activity name.
+
+- 'train/X_train.txt': Training set.
+
+- 'train/y_train.txt': Training labels.
+
+- 'test/X_test.txt': Test set.
+
+- 'test/y_test.txt': Test labels.
+
+Steps to clean the data:
+1. Download the data set from the link above either manually or using the download.file() function.
+2. Install and open the "plyr" and "data.table" packages.
+3. Read through the relevant files listed above by using the read.table() function and assign them to variables.
+4. Merge the subject data, the y data, and the x data by using the rbind() and cbind() functions. The subject data should be given a     variable name of "Subject", the y data with name "Activity", and the x data with names from the 'features.txt' file.
+5. To create a new data set with just the mean and std measurements, use the grep() function to extract out all data with "mean"         and "std" in them. Use the subset() function to extract these columns. 
+6. Give descriptive activity names to the mean_std_data$Activity data by using a for loop and assigning the names in 'activity.txt'
+   to the appropriate numbers 1-6.
+7. Appropriately label the data set with descriptive variable names by using the gsub() function. For example, "t" can be changed to
+   "time", or "f" can be changed to "freq". 
+8. To create the new independent tidy data set which is the average of each subject and each activity, use the aggregate() function 
+   to group mean_std_data by "Subject" and "Activity" and then finds the mean for each. Write this new tidy data as a txt file by 
+   using the write.table() function.
+
+
